@@ -17,6 +17,9 @@ Returns: json ONLY
 /*
 PATHS:
 
+/verse/id > GET Verse by ID
+/verse/code > GET Verse(s) by Code
+
 /book/chapter/verse > GET Verse-Object
 /book/chapter > GET List of Verse-Objects
 /book > GET List of Verse-Objects
@@ -46,6 +49,7 @@ translation=XXX
 
 VERSE OBJECT
 {
+  id: 'internal-id (=booknr-chapter-verse)',
   book: {
     BOOK OBJECT
   },
@@ -78,6 +82,8 @@ TRANSLATION OBJECT
   name: "String"
 }
 
+CODE:
+<BookRef><Chapter>,<verse>[-<verse>][;Repeat]
 
 */
 
