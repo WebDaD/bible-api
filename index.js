@@ -9,7 +9,7 @@ const port = process.env.PORT || config.port
 // TODO: read bible files into memory
 
 app.get('/', function (req, res) {
-  res.send('Hello')
+  res.json({})
   // TODO: Get Basic Help Information
 })
 
