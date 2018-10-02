@@ -54,7 +54,7 @@ app.get('/bible/:book', function (req, res) {
     }
   }
 
-  res.json(result)
+  res.json(result['0'])
 })
 app.get('/bible/:book/:chapter', function (req, res) {
   let b = req.params.book
@@ -73,8 +73,7 @@ app.get('/bible/:book/:chapter', function (req, res) {
       }
     }
   }
-
-  res.json(result.chapters[req.params.chapter])
+  res.json(result['0'].chapters[req.params.chapter])
 })
 /*
 Returns: json ONLY
