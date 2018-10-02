@@ -13,6 +13,13 @@ app.get('/', function (req, res) {
   // TODO: Get Basic Help Information. Send an index.html
 })
 
+app.get('/translations', function (req, res) {
+  res.json([
+    'ELB'
+  ])
+  // TODO: replace with file
+})
+
 /*
 Returns: json ONLY
 */
