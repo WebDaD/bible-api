@@ -60,17 +60,17 @@ app.get('/bible/:book', function (req, res) {
   }
 })
 app.get('/bible/:book/:chapter', function (req, res) {
-  let b = req.params.book
+  let b = parseInt(req.params.book)
   let result = {}
   let key
   for (key in structure) {
     if (structure.hasOwnProperty(key)) {
-      if (typeof b === 'number') {
+      if (!isNaN(b)) {
         if (parseInt(structure[key]['number']) === parseInt(b)) {
           result[key] = structure[key]
         }
       } else { // ref
-        if (structure[key].ref.de.toLowerCase() === b.toLowerCase()) {
+        if (structure[key].ref.de.toLowerCase() === req.params.book.toLowerCase()) {
           result[key] = structure[key]
         }
       }
@@ -79,7 +79,7 @@ app.get('/bible/:book/:chapter', function (req, res) {
   if (result['0']) {
     res.json(parseInt(result['0'].chapters[req.params.chapter]))
   } else {
-    res.status(404).send('Book ' + b + ' with Chapter ' + req.params.chapter + ' not found')
+    res.status(404).send('Book ' + req.params.book + ' with Chapter ' + req.params.chapter + ' not found')
   }
 })
 /*
