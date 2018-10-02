@@ -18,7 +18,8 @@ app.get('/translations', function (req, res) {
     'ELB',
     'SCH',
     'KJV',
-    'LUT'
+    'LUT',
+    'NEÜ'
   ])
   // TODO: replace with file
 })
