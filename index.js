@@ -10,7 +10,7 @@ const port = process.env.PORT || config.port
 
 app.get('/', function (req, res) {
   res.json({})
-  // TODO: Get Basic Help Information
+  // TODO: Get Basic Help Information. Send an index.html
 })
 
 /*
