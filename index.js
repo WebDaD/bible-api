@@ -53,7 +53,11 @@ app.get('/bible/:book', function (req, res) {
       }
     }
   }
-  res.json(result['0'])
+  if (result['0']) {
+    res.json(result['0'])
+  } else {
+    res.status(404).send('Book ' + b + ' not found')
+  }
 })
 app.get('/bible/:book/:chapter', function (req, res) {
   let b = req.params.book
@@ -72,7 +76,11 @@ app.get('/bible/:book/:chapter', function (req, res) {
       }
     }
   }
-  res.json(parseInt(result['0'].chapters[req.params.chapter]))
+  if (result['0']) {
+    res.json(parseInt(result['0'].chapters[req.params.chapter]))
+  } else {
+    res.status(404).send('Book ' + b + ' with Chapter ' + req.params.chapter + ' not found')
+  }
 })
 /*
 Returns: json ONLY
