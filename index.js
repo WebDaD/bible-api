@@ -13,6 +13,11 @@ app.get('/', function (req, res) {
   // TODO: Get Basic Help Information. Send an index.html
 })
 
+app.get('/secret-restart', function (req, res) {
+  process.exit(0)
+  // TODO: remove this
+})
+
 app.get('/translations', function (req, res) {
   res.json([
     'ELB',
