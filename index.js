@@ -17,7 +17,8 @@ app.get('/translations', function (req, res) {
   res.json([
     'ELB',
     'SCH',
-    'KJV'
+    'KJV',
+    'LUT'
   ])
   // TODO: replace with file
 })
