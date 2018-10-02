@@ -43,7 +43,7 @@ app.get('/bible/:book', function (req, res) {
   for (key in structure) {
     if (structure.hasOwnProperty(key)) {
       if (typeof b === 'number') {
-        if (parseInt(structure[key].number) === parseInt(b)) {
+        if (parseInt(structure[key]['number']) === parseInt(b)) {
           result[key] = structure[key]
         }
       } else { // ref
@@ -53,7 +53,6 @@ app.get('/bible/:book', function (req, res) {
       }
     }
   }
-
   res.json(result['0'])
 })
 app.get('/bible/:book/:chapter', function (req, res) {
@@ -63,7 +62,7 @@ app.get('/bible/:book/:chapter', function (req, res) {
   for (key in structure) {
     if (structure.hasOwnProperty(key)) {
       if (typeof b === 'number') {
-        if (parseInt(structure[key].number) === parseInt(b)) {
+        if (parseInt(structure[key]['number']) === parseInt(b)) {
           result[key] = structure[key]
         }
       } else { // ref
@@ -73,7 +72,7 @@ app.get('/bible/:book/:chapter', function (req, res) {
       }
     }
   }
-  res.json(result['0'].chapters[req.params.chapter])
+  res.json(parseInt(result['0'].chapters[req.params.chapter]))
 })
 /*
 Returns: json ONLY
@@ -101,8 +100,6 @@ PATHS:
 /daily/year > GET List of Verse-Objects, preset by date
 /daily > GET List of Verse-Objects, preset by date
 
-/bible/book > Get Chapters and VerseNumbers
-/bible/book/chapter > Get Number of Verses
 
 / > GET some usage Information, mainly Links
 
