@@ -4,6 +4,8 @@ const server = require('http').createServer(app)
 const config = require('./config.json')
 const jsonfile = require('jsonfile')
 
+const port = process.env.PORT || config.port
+
 // TODO: read bible files into memory
 
 app.get('/', function (req, res) {
@@ -88,6 +90,6 @@ CODE:
 
 */
 
-server.listen(config.port)
+server.listen(port)
 
-console.log('bible-api running on Port ' + config.port)
+console.log('bible-api running on Port ' + port)
