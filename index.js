@@ -43,11 +43,11 @@ app.get('/bible/:book', function (req, res) {
   for (key in structure) {
     if (structure.hasOwnProperty(key)) {
       if (typeof b === 'number') {
-        if (structure[key].number === b) {
+        if (structure[key].number === parseInt(b)) {
           result[key] = structure[key]
         }
       } else { // ref
-        if (structure[key].ref.de === b) {
+        if (structure[key].ref.de.toLowerCase() === b.toLowerCase()) {
           result[key] = structure[key]
         }
       }
