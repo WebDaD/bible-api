@@ -1,3 +1,42 @@
 {
-  "ELB": "Elberfelder"
+  "ELB": {
+    "name": "Elberfelder",
+    "language": "de"
+  },
+  "LUT17": {
+    "name": "Luther 2017",
+    "language": "de"
+  },
+  "LUT84": {
+    "name": "Luther 1984",
+    "language": "de"
+  },
+  "GNB": {
+    "name": "Gute Nachricht",
+    "language": "de"
+  },
+  "MNG": {
+    "name": "Menge",
+    "language": "de"
+  },
+  "EUE": {
+    "name": "Einheitsübersetzung",
+    "language": "de"
+  },
+  "ZUB": {
+    "name": "Zürcher",
+    "language": "de"
+  },
+  "NGUE": {
+    "name": "Neue Genfer Übersetzung",
+    "language": "de"
+  },
+  "SCHL": {
+    "name": "Schlachter",
+    "language": "de"
+  },
+  "KJV": {
+    "name": "King James ",
+    "language": "en"
+  }
 }

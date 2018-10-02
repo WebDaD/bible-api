@@ -6,6 +6,7 @@ const jsonfile = require('jsonfile')
 
 const port = process.env.PORT || config.port
 
+const translations = jsonfile.readFileSync('data/translations.json')
 // TODO: read bible files into memory
 
 app.get('/', function (req, res) {
@@ -19,17 +20,18 @@ app.get('/secret-restart', function (req, res) {
 })
 
 app.get('/translations', function (req, res) {
-  res.json([
-    'ELB',
-    'SCH',
-    'KJV',
-    'LUT',
-    'NEÜ',
-    'NGÜ'
-  ])
-  // TODO: replace with file
+  res.json(translations)
 })
-
+app.get('/translations/:language', function (req, res) {
+  let result = {}
+  let key
+  for (key in translations) {
+    if (translations.hasOwnProperty(key) && translations[key].language === req.params.language) {
+      result[key] = translations[key]
+    }
+  }
+  res.json(result)
+})
 /*
 Returns: json ONLY
 */
