@@ -7,6 +7,7 @@ const jsonfile = require('jsonfile')
 const port = process.env.PORT || config.port
 
 const translations = jsonfile.readFileSync('data/translations.json')
+const structure = jsonfile.readFileSync('data/structure.json')
 // TODO: read bible files into memory
 
 app.get('/', function (req, res) {
@@ -30,6 +31,29 @@ app.get('/translations/:language', function (req, res) {
       result[key] = translations[key]
     }
   }
+  res.json(result)
+})
+app.get('/bible', function (req, res) {
+  res.json(structure)
+})
+app.get('/bible/:book', function (req, res) {
+  let b = req.params.book
+  let result = {}
+  let key
+  for (key in structure) {
+    if (structure.hasOwnProperty(key)) {
+      if (typeof b === 'number') {
+        if (structure[key].number === b) {
+          result[key] = structure[key]
+        }
+      } else { // ref
+        if (structure[key].ref.de === b) {
+          result[key] = structure[key]
+        }
+      }
+    }
+  }
+
   res.json(result)
 })
 /*
@@ -58,9 +82,6 @@ PATHS:
 /daily/year > GET List of Verse-Objects, preset by date
 /daily > GET List of Verse-Objects, preset by date
 
-/translations > Get List of Translations
-
-/bible > Get List of Books with Chapters and VerseNumbers
 /bible/book > Get Chapters and VerseNumbers
 /bible/book/chapter > Get Number of Verses
 
@@ -95,13 +116,10 @@ BOOK OBJECT
     de: "string",
     en: "string",
     ...
+  },
+  chapters: {
+    "number": "int verses"
   }
-}
-
-TRANSLATION OBJECT
-{
-  ref: "String",
-  name: "String"
 }
 
 CODE:
