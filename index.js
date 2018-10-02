@@ -37,17 +37,17 @@ app.get('/bible', function (req, res) {
   res.json(structure)
 })
 app.get('/bible/:book', function (req, res) {
-  let b = req.params.book
+  let b = parseInt(req.params.book)
   let result = {}
   let key
   for (key in structure) {
     if (structure.hasOwnProperty(key)) {
-      if (typeof b === 'number') {
-        if (parseInt(structure[key]['number']) === parseInt(b)) {
+      if (!isNaN(b)) {
+        if (parseInt(structure[key]['number']) === b) {
           result[key] = structure[key]
         }
       } else { // ref
-        if (structure[key].ref.de.toLowerCase() === b.toLowerCase()) {
+        if (structure[key].ref.de.toLowerCase() === req.params.book.toLowerCase()) {
           result[key] = structure[key]
         }
       }
@@ -56,7 +56,7 @@ app.get('/bible/:book', function (req, res) {
   if (result['0']) {
     res.json(result['0'])
   } else {
-    res.status(404).send('Book ' + b + ' not found')
+    res.status(404).send('Book ' + req.params.book + ' not found')
   }
 })
 app.get('/bible/:book/:chapter', function (req, res) {
