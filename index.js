@@ -43,7 +43,7 @@ app.get('/bible/:book', function (req, res) {
   for (key in structure) {
     if (structure.hasOwnProperty(key)) {
       if (typeof b === 'number') {
-        if (structure[key].number === parseInt(b)) {
+        if (parseInt(structure[key].number) === parseInt(b)) {
           result[key] = structure[key]
         }
       } else { // ref
@@ -55,6 +55,26 @@ app.get('/bible/:book', function (req, res) {
   }
 
   res.json(result)
+})
+app.get('/bible/:book/:chapter', function (req, res) {
+  let b = req.params.book
+  let result = {}
+  let key
+  for (key in structure) {
+    if (structure.hasOwnProperty(key)) {
+      if (typeof b === 'number') {
+        if (parseInt(structure[key].number) === parseInt(b)) {
+          result[key] = structure[key]
+        }
+      } else { // ref
+        if (structure[key].ref.de.toLowerCase() === b.toLowerCase()) {
+          result[key] = structure[key]
+        }
+      }
+    }
+  }
+
+  res.json(result.chapters[req.params.chapter])
 })
 /*
 Returns: json ONLY
