@@ -7,6 +7,7 @@ const jsonfile = require('jsonfile')
 // TODO: read bible files into memory
 
 app.get('/', function (req, res) {
+  res.send('Hello')
   // TODO: Get Basic Help Information
 })
 
