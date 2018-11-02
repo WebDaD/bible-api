@@ -1,10 +1,10 @@
 {
   "name": "bible-api",
-  "version": "1.0.0",
+  "version": "0.5.0",
   "description": "A simple API to display the bible",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/*.js || true"
   },
   "author": "Dominik Sigmund",
   "repository": {
@@ -17,5 +17,9 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "jsonfile": "^5.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
   }
 }

@@ -6,7 +6,7 @@ const jsonfile = require('jsonfile')
 const fs = require('fs')
 const path = require('path')
 var cookieParser = require('cookie-parser')
-const Bible = require('lib/bible')
+const Bible = require('./lib/bible.js')
 
 const port = process.env.PORT || config.port
 
@@ -192,11 +192,19 @@ app.get('/weekly', function (req, res) {
   }
   res.json(output) // FIXME: if undefined, return 404
 })
+app.get('/daily/:year/:month/:day', function (req, res) {
+  let output = bible.getVerseFromID(daily[req.params.year][req.params.month][req.params.day]['losung'], req.translation)
+  if (output) {
+    res.json(output) // FIXME: also lehrtext
+  } else {
+    res.status(404).json({error: 'No Daily Verses for Month ' + req.params.month + ' in year ' + req.params.year + ' found'})
+  }
+})
 app.get('/daily/:year/:month', function (req, res) {
   let output = {}
   for (var d in daily[req.params.year][req.params.month]) {
     if (daily[req.params.year][req.params.month].hasOwnProperty(d)) {
-      output[d] = bible.getVerseFromID(daily[req.params.year][req.params.month][d], req.translation)
+      output[d] = bible.getVerseFromID(daily[req.params.year][req.params.month][d]['losung'], req.translation) // FIXME: also lehrtext
     }
   }
   if (output) {
@@ -205,20 +213,24 @@ app.get('/daily/:year/:month', function (req, res) {
     res.status(404).json({error: 'No Daily Verses for Month ' + req.params.month + ' in year ' + req.params.year + ' found'})
   }
 })
+app.get('/daily/today', function (req, res) {
+  // TODO: return daily for now!
+})
 app.get('/daily/:dateOrYear', function (req, res) {
   if (req.params.dateOrYear.includes('-')) { // is Date
     let ds = req.params.dateOrYear.split('-')
     let year = ds[0]
     let month = ds[1]
     let day = ds[2]
-    res.json(bible.getVerseFromID(daily[year][month][day], req.translation)) // FIXME: if undefined, return 404
+    res.json(bible.getVerseFromID(daily[year][month][day]['losung'], req.translation)) // FIXME: if undefined, return 404
+    // FIXME: also lehrtext
   } else { // is Year
     let output = {}
     for (var m in daily[req.params.dateOrYear]) {
       if (daily[req.params.dateOrYear].hasOwnProperty(m)) {
         for (var d in daily[req.params.dateOrYear][m]) {
           if (daily[req.params.dateOrYear][m].hasOwnProperty(d)) {
-            output[m][d] = bible.getVerseFromID(daily[req.params.dateOrYear][m][d], req.translation)
+            output[m][d] = bible.getVerseFromID(daily[req.params.dateOrYear][m][d]['losung'], req.translation) // FIXME: also lehrtext
           }
         }
       }
@@ -238,7 +250,7 @@ app.get('/daily', function (req, res) {
         if (daily[y].hasOwnProperty(m)) {
           for (var d in daily[y][m]) {
             if (daily[y][m].hasOwnProperty(d)) {
-              output[y][m][d] = bible.getVerseFromID(daily[y][m][d], req.translation)
+              output[y][m][d] = bible.getVerseFromID(daily[y][m][d]['losung'], req.translation) // FIXME: also lehrtext
             }
           }
         }
