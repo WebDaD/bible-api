@@ -1,7 +1,7 @@
 
 import Error from './Error'
 
-/** Simple Object Class Verse
+/** Simple Object Class Book
  * @class Book
  * */
 export class Book {
@@ -9,11 +9,11 @@ export class Book {
 
   constructor(id:number) {
     this._id = id
+    // TODO: Load MetaData (chapters, verses, refs, ...)
   }
 
-  public byRef (ref:string): Book | Error {
-    // TODO: getBook byRef
-    return new Book(1)
+  public getNumber (): number {
+    return this._id
   }
 
   public toJSON() {
