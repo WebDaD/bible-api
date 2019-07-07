@@ -21,3 +21,6 @@
 * import weekly
 * import bibles
 * crosreferences
+
+
+* Add CommandLine Tool for global installers
